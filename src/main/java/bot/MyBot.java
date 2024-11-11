@@ -35,11 +35,10 @@ public class MyBot extends TelegramLongPollingBot {
         if (currentUser == null) {
             currentUser = new TelegramUser();
             currentUser.setChatId(chatId);
-            TelegramUser.telegramUserList.add(currentUser);
-        }
+            TelegramUser.telegramUserList.add(currentUser);       }
 
         if(text.equals("/inlinebutton")){
-            SendMessage sendMessage = new SendMessage(chatId, "Tugmani tanlang!");
+            SendMessage sendMessage = new SendMessage(chatId, "Tugmalardan O'zingizga keragligin tanlang✅!");
 
             InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
@@ -48,7 +47,7 @@ public class MyBot extends TelegramLongPollingBot {
             List<InlineKeyboardButton> inlineKeyboardButtons2 = new ArrayList<>();
             InlineKeyboardButton salom1 = new InlineKeyboardButton("Salom1");
             salom1.setCallbackData("SALOM_1");
-            salom1.setUrl("https://kun.uz");
+            salom1.setUrl("https://uzmovi.com/");
             InlineKeyboardButton salom2 = new InlineKeyboardButton("Salom2");
             salom2.setCallbackData("SALOM_2");
             InlineKeyboardButton salom3 = new InlineKeyboardButton("Salom3");
@@ -67,13 +66,14 @@ public class MyBot extends TelegramLongPollingBot {
             listButtons.add(inlineKeyboardButtons1);
             listButtons.add(inlineKeyboardButtons2);
 
+
             inlineKeyboardMarkup.setKeyboard(listButtons);
 
             sendMessage.setReplyMarkup(inlineKeyboardMarkup);
             sendMyMessage(sendMessage);
         }
 
-        if(text.equals("/button")){
+        if(text.equals("/yordam")){
             SendMessage sendMessage = new SendMessage(chatId, "Tugmani bosing!");
 
             ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
@@ -81,15 +81,19 @@ public class MyBot extends TelegramLongPollingBot {
             List<KeyboardRow> keyboardRows = new ArrayList<>();
             KeyboardRow row1 = new KeyboardRow();
             KeyboardRow row2 = new KeyboardRow();
-            KeyboardButton keyboardButton1 = new KeyboardButton("Kontaktni ulashish");
-            keyboardButton1.setRequestContact(true);
-            KeyboardButton keyboardButton2 = new KeyboardButton("Lokatsiya yuborish");
-            keyboardButton2.setRequestLocation(true);
-            KeyboardButton keyboardButton3 = new KeyboardButton("Open app");
-            keyboardButton3.setWebApp(new WebAppInfo("https://kun.uz"));
+            KeyboardRow row3 = new KeyboardRow();
+            KeyboardButton keyboardButton1 = new KeyboardButton("Eng Yaqin Avtosevis:🚗");
+            keyboardButton1.setWebApp(new WebAppInfo("https://yandex.uz/maps/10335/tashkent/search/%D0%90%D0%B2%D1%82%D0%BE%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B/?ll=69.250320%2C41.284652&sctx=ZAAAAAgBEAAaKAoSCbMlqyLcUVFAESQlPQytqERAEhIJmgXaHVIMvD8RgVt381SHrD8iBgABAgMEBSgKOABA31BIAWoCdXqdAc3MzD2gAQCoAQC9Afga8g7CAZIBleix07oCg8KVgMMB0JHYstoD%2F9f9gYcGhbHuqfsE%2FOOH894GhqezlmLJ%2FZ2LngaW1u%2BEuwGnxOHdN4XO6Nu3AaCDpMqLAvr%2BxuP4AojF7ovXBLvW7r2yAZeA96mABv3r75HDA%2B%2BuzY6NA%2BKeho0kp7mao9cF3PyPuc8FzsXasBSO5%2FfBlQbrlPyE5AWItsDYhQOCAhbQkNCy0YLQvtGB0LXRgNCy0LjRgdGLigIdMTg0MTA1MjQ2JDE4NDEwNTI2MCQxODQxMDUyNTaSAgCaAgxkZXNrdG9wLW1hcHM%3D&sll=69.250320%2C41.284652&sspn=0.133031%2C0.067690&z=13.26"));
+            KeyboardButton keyboardButton2 = new KeyboardButton("Onlayn Yo'rdam:🆘");
+            keyboardButton2.setWebApp(new WebAppInfo("https://www.youtube.com/results?search_query=kochada+balon+almashtirish"));
+            KeyboardButton keyboardButton3 = new KeyboardButton("Mehanik bilan bog'lanish:🧑🏿‍🔧");
+            keyboardButton3.setWebApp(new WebAppInfo("https://auto.ustabor.uz/uz/price/transmission_repairs"));
+            KeyboardButton keyboardButton4 = new KeyboardButton("Tezko'r Yo'rdam:📞");
+            keyboardButton4.setWebApp(new WebAppInfo("https://iibb.uz/uz/menu/shoshilinch-xizmat-telefon-raqamlari"));
             row1.add(keyboardButton1);
             row1.add(keyboardButton2);
             row2.add(keyboardButton3);
+            row3.add(keyboardButton4);
             keyboardRows.add(row1);
             keyboardRows.add(row2);
 
@@ -102,7 +106,7 @@ public class MyBot extends TelegramLongPollingBot {
         }
 
         if (currentUser.getState() == null && text.equals("/start")) {
-            SendMessage sendMessage1 = new SendMessage(chatId, "Salom botga xush kelibsiz!");
+            SendMessage sendMessage1 = new SendMessage(chatId, "Salom Yordam bot ga Hush Kelib siz!");
             SendMessage sendMessage2 = new SendMessage(chatId, "Ismizni yuboring");
             currentUser.setState(TelegramUserState.FIRSTNAME);
             sendMyMessage(sendMessage1);
@@ -120,29 +124,25 @@ public class MyBot extends TelegramLongPollingBot {
         } else if (currentUser.getState().equals(TelegramUserState.AGE)) {
             currentUser.setAge(Integer.parseInt(text));
             currentUser.setState(TelegramUserState.COURSE);
-            SendMessage sendMessage1 = new SendMessage(chatId, "Kursni tanlab raqamini yuboring!");
-            SendMessage sendMessage2 = new SendMessage(chatId, "1. Java Generation\n2.Python\n3.Frontend\n4.Robototexnika");
+            SendMessage sendMessage1 = new SendMessage(chatId, "Sizga Yordam kerag bolsa : /yordam : ni Bosing");
+
             sendMyMessage(sendMessage1);
-            sendMyMessage(sendMessage2);
         } else if (currentUser.getState().equals(TelegramUserState.COURSE)) {
             String kursNomi = null;
             switch (text) {
                 case "1":
-                    kursNomi = "Java Generation";
+                    kursNomi = "Lavash";
                     break;
                 case "2":
-                    kursNomi = "Python";
+                    kursNomi = "Senvich";
                     break;
                 case "3":
-                    kursNomi = "Frontend";
-                    break;
-                case "4":
-                    kursNomi = "Robototexnika";
+                    kursNomi = "kurvasan";
                     break;
             }
             currentUser.setCourse(kursNomi);
             currentUser.setState(TelegramUserState.TELEFONRAQAM);
-            SendMessage sendMessage = new SendMessage(chatId, "Telefon raqamizni kiriting!");
+            SendMessage sendMessage = new SendMessage(chatId, "Telefon raqamizni kiriting! Va joylashgan joyingizni kriting");
             sendMyMessage(sendMessage);
         } else if (currentUser.getState().equals(TelegramUserState.TELEFONRAQAM)) {
             currentUser.setPhoneNumber(text);
@@ -151,8 +151,8 @@ public class MyBot extends TelegramLongPollingBot {
             String tekshirishUchun = "Ism: " + currentUser.getFirstName() +"\n" +
                     "Familiya: " + currentUser.getLastName() +"\n" +
                     "Yosh: " + currentUser.getAge() +"\n" +
-                    "Tanlangan kurs: " + currentUser.getCourse() + "\n" +
-                    "Telefon raqam: " + currentUser.getPhoneNumber() + "\n\n" +
+                    "Tanlangan tanlov: " + currentUser.getCourse() + "\n" +
+                    "Telefon raqam va Lokatsiya: " + currentUser.getPhoneNumber() + "\n\n" +
                     "Malumotlariz to'g'rimi ? 1.Xa 2.Yo'q";
 
             SendMessage sendMessage1 = new SendMessage(chatId, "Tabriklaymiz siz muvaffaqiyatli ro'xatdan o'tdiz, malunmotlarizni tekshiring Admin siz bn boglnada!");
@@ -179,7 +179,7 @@ public class MyBot extends TelegramLongPollingBot {
                 showText.append("Familiyasi: ").append(user.getLastName()).append("\n");
                 showText.append("Yoshi: ").append(user.getAge()).append("\n");
                 showText.append("Tanlagan kursi: ").append(user.getCourse()).append("\n");
-                showText.append("Telefon raqami: ").append(user.getPhoneNumber()).append("\n");
+                showText.append("Telefon raqami va lokatsiya: ").append(user.getPhoneNumber()).append("\n");
                 showText.append("\n");
             }
 
@@ -200,11 +200,11 @@ public class MyBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "educenterd28bot";
+        return "coscoovo_bot";
     }
 
     @Override
     public String getBotToken() {
-        return "bot-token";
+        return "7652403414:AAHCNXCqZcu5j0kWxB07OmQ74_qGmnM6SP4";
     }
 }
