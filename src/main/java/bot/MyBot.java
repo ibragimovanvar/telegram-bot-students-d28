@@ -107,22 +107,23 @@ public class MyBot extends TelegramLongPollingBot {
 
         if (currentUser.getState() == null && text.equals("/start")) {
             SendMessage sendMessage1 = new SendMessage(chatId, "Salom Yordam bot ga Hush Kelib siz!");
-            SendMessage sendMessage2 = new SendMessage(chatId, "Ismizni yuboring");
+            SendMessage sendMessage2 = new SendMessage(chatId, "Ismizni yuboring👤");
             currentUser.setState(TelegramUserState.FIRSTNAME);
             sendMyMessage(sendMessage1);
+
             sendMyMessage(sendMessage2);
         } else if (currentUser.getState().equals(TelegramUserState.FIRSTNAME)) {
             currentUser.setFirstName(text);
             currentUser.setState(TelegramUserState.LASTNAME);
-            SendMessage sendMessage = new SendMessage(chatId, "Familiyezni yuboring!");
+            SendMessage sendMessage = new SendMessage(chatId, "Telifon Raqmingizni Yuboring📞:");
             sendMyMessage(sendMessage);
         } else if (currentUser.getState().equals(TelegramUserState.LASTNAME)) {
             currentUser.setLastName(text);
             currentUser.setState(TelegramUserState.AGE);
-            SendMessage sendMessage = new SendMessage(chatId, "Yoshizni yuboring!");
+            SendMessage sendMessage = new SendMessage(chatId, "Muamoni Yuboring❗");
             sendMyMessage(sendMessage);
         } else if (currentUser.getState().equals(TelegramUserState.AGE)) {
-            currentUser.setAge(Integer.parseInt(text));
+            currentUser.setAge(text);
             currentUser.setState(TelegramUserState.COURSE);
             SendMessage sendMessage1 = new SendMessage(chatId, "Sizga Yordam kerag bolsa : /yordam : ni Bosing");
 
@@ -142,18 +143,18 @@ public class MyBot extends TelegramLongPollingBot {
             }
             currentUser.setCourse(kursNomi);
             currentUser.setState(TelegramUserState.TELEFONRAQAM);
-            SendMessage sendMessage = new SendMessage(chatId, "Telefon raqamizni kiriting! Va joylashgan joyingizni kriting");
+            SendMessage sendMessage = new SendMessage(chatId, "Joylashgan Joyingizni Kriting📍");
             sendMyMessage(sendMessage);
         } else if (currentUser.getState().equals(TelegramUserState.TELEFONRAQAM)) {
             currentUser.setPhoneNumber(text);
             currentUser.setState(TelegramUserState.REGISTERED);
 
-            String tekshirishUchun = "Ism: " + currentUser.getFirstName() +"\n" +
-                    "Familiya: " + currentUser.getLastName() +"\n" +
-                    "Yosh: " + currentUser.getAge() +"\n" +
+            String tekshirishUchun = "Ism👤: " + currentUser.getFirstName() +"\n" +
+                    "Telifon Raqamingiz📞: " + currentUser.getLastName() +"\n" +
+                    "Muamo❗: " + currentUser.getAge() +"\n" +
                     "Tanlangan tanlov: " + currentUser.getCourse() + "\n" +
-                    "Telefon raqam va Lokatsiya: " + currentUser.getPhoneNumber() + "\n\n" +
-                    "Malumotlariz to'g'rimi ? 1.Xa 2.Yo'q";
+                    "Joylashgan Joyingiz📍: " + currentUser.getPhoneNumber() + "\n\n" +
+                    "Malumotlariz to'g'rimi ? 1.Xa ✅ 2.Yo'q ❌";
 
             SendMessage sendMessage1 = new SendMessage(chatId, "Tabriklaymiz siz muvaffaqiyatli ro'xatdan o'tdiz, malunmotlarizni tekshiring Admin siz bn boglnada!");
             SendMessage sendMessage2 = new SendMessage(chatId, tekshirishUchun);
@@ -165,7 +166,7 @@ public class MyBot extends TelegramLongPollingBot {
                 currentUser.setState(TelegramUserState.FIRSTNAME);
                 sendMessage.setText("Qaytadan malumotlarizni kiriting!");
             }else{
-                sendMessage.setText("Iltimos admin javobini kuting!");
+                sendMessage.setText("Iltimos admin javobini kuting: Admin blan bo'glanish uchun 📲 (94-606-77-83)");
             }
             sendMessage.setChatId(chatId);
             sendMyMessage(sendMessage);
@@ -175,13 +176,7 @@ public class MyBot extends TelegramLongPollingBot {
         if(text.equals("/show")){
             StringBuilder showText = new StringBuilder();
             for (TelegramUser user : TelegramUser.telegramUserList) {
-                showText.append("Ismi: ").append(user.getFirstName()).append("\n");
-                showText.append("Familiyasi: ").append(user.getLastName()).append("\n");
-                showText.append("Yoshi: ").append(user.getAge()).append("\n");
-                showText.append("Tanlagan kursi: ").append(user.getCourse()).append("\n");
-                showText.append("Telefon raqami va lokatsiya: ").append(user.getPhoneNumber()).append("\n");
-                showText.append("\n");
-            }
+                            }
 
             SendMessage sendMessage = new SendMessage(chatId, showText.toString());
             sendMyMessage(sendMessage);

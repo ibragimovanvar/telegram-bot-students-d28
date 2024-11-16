@@ -9,7 +9,7 @@ public class TelegramUser {
     private String chatId;
     private String firstName;
     private String lastName;
-    private int age;
+    private String  age;
     private String course;
     private String phoneNumber;
     private TelegramUserState state;
@@ -38,11 +38,11 @@ public class TelegramUser {
         this.lastName = lastName;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
